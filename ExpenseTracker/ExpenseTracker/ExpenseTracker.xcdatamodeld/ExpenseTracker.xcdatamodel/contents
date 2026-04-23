@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
+    <entity name="Category" representedClassName="Category" syncable="YES" codeGenerationType="class">
+        <attribute name="budgetLimit" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String"/>
+        <relationship name="expenses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Expense" inverseName="category" inverseEntity="Expense"/>
+        <relationship name="recurringExpenses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RecurringExpense" inverseName="category" inverseEntity="RecurringExpense"/>
+    </entity>
+    <entity name="Expense" representedClassName="Expense" syncable="YES" codeGenerationType="class">
+        <attribute name="amount" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="desc" optional="YES" attributeType="String"/>
+        <attribute name="isIncome" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="receiptData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="expenses" inverseEntity="Category"/>
+    </entity>
+    <entity name="RecurringExpense" representedClassName="RecurringExpense" syncable="YES" codeGenerationType="class">
+        <attribute name="amount" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="desc" optional="YES" attributeType="String"/>
+        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="frequency" optional="YES" attributeType="String"/>
+        <attribute name="isActive" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="nextDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="recurringExpenses" inverseEntity="Category"/>
+    </entity>
+    <elements>
+        <element name="Category" positionX="-63" positionY="-18" width="128" height="103"/>
+        <element name="Expense" positionX="100" positionY="-18" width="128" height="163"/>
+        <element name="RecurringExpense" positionX="263" positionY="-18" width="128" height="148"/>
+    </elements>
+</model>
