@@ -1,5 +1,6 @@
 import SwiftUI
 import Charts
+import CoreData
 
 struct DashboardView: View {
     @Environment(\.managedObjectContext) private var viewContext

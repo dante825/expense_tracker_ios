@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreData
 
 struct RecurringView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -23,7 +24,7 @@ struct RecurringView: View {
             }
             .navigationTitle("Recurring")
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarTrailing) {
                     Button { showingAdd = true } label: { Image(systemName: "plus") }
                 }
             }

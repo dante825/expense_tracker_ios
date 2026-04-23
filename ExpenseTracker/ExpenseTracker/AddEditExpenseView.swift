@@ -1,5 +1,6 @@
 import SwiftUI
 import PhotosUI
+import CoreData
 
 struct AddEditExpenseView: View {
     @Environment(\.managedObjectContext) private var viewContext

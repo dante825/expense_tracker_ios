@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreData
 
 struct CategoriesView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -18,7 +19,7 @@ struct CategoriesView: View {
             }
             .navigationTitle("Categories")
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarTrailing) {
                     Button { showingAdd = true } label: { Image(systemName: "plus") }
                 }
             }

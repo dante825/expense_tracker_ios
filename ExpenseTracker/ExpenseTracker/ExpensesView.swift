@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreData
 
 struct ExpensesView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -72,7 +73,7 @@ struct ExpensesView: View {
             .searchable(text: $search, prompt: "Search expenses")
             .navigationTitle("Expenses")
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarTrailing) {
                     Button { showingAdd = true } label: { Image(systemName: "plus") }
                 }
             }
