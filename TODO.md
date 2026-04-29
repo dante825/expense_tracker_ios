@@ -4,7 +4,21 @@
 
 - [x] **Add app icon** — `kang-01-currency-1024.png` (1024×1024) copied to `ExpenseTracker/ExpenseTracker/Assets.xcassets/AppIcon.appiconset/AppIcon-1024.png`.
 
-- [ ] **Set up App Store distribution signing** — In Xcode → Signing & Capabilities, switch the Release build configuration from `Apple Development` to `Apple Distribution` and attach an App Store provisioning profile.
+- [x] **Set up signing for personal device** — App Store distribution signing is not needed. For personal use, connect your iPhone via USB, sign into Xcode with your Apple ID (free account is sufficient), and Xcode will auto-create a Personal Team provisioning profile. Re-build from Xcode every 7 days as free profiles expire weekly (a paid $99/yr Apple Developer account extends this to 1 year).
+
+## Tag Improvements
+
+- [ ] **Refine tag creation and removal** — Polish the tag experience:
+  - Allow renaming an existing tag from `TagsView` (tap tag name to edit inline).
+  - Confirm before deleting a tag that is attached to expenses — show count of affected expenses in the alert.
+  - Prevent saving a new tag with a blank or whitespace-only name (already guarded in code, but surface a clear error message to the user).
+
+- [ ] **Tag add/remove from expense list** — Allow tagging without opening the full edit form:
+  - Long-press an `ExpenseRow` → context menu with "Add Tag" and "Remove Tag" options.
+  - "Add Tag" shows the same `Menu` dropdown used in `AddEditExpenseView`.
+  - "Remove Tag" lists only the tags currently on that expense.
+
+- [ ] **Dashboard tagged/untagged toggle** — Replace the fixed "Tagged" / "Untagged" split sections with a single "Recent Entries" section and a segmented control (`All` | `Tagged` | `Untagged`) so the user can switch views without scrolling past both lists.
 
 ## Quality (ship without, but recommended)
 

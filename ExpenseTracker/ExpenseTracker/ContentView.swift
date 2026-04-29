@@ -12,6 +12,8 @@ struct ContentView: View {
                 .tabItem { Label("Categories", systemImage: "folder.fill") }
             RecurringView()
                 .tabItem { Label("Recurring", systemImage: "repeat") }
+            TagsView()
+                .tabItem { Label("Tags", systemImage: "tag.fill") }
         }
     }
 }

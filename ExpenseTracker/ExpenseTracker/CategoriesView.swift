@@ -11,18 +11,27 @@ struct CategoriesView: View {
 
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(categories) { cat in
-                    CategoryRow(category: cat)
+            ZStack(alignment: .bottomTrailing) {
+                List {
+                    ForEach(categories) { cat in
+                        CategoryRow(category: cat)
+                    }
+                    .onDelete(perform: deleteCategories)
                 }
-                .onDelete(perform: deleteCategories)
+
+                Button { showingAdd = true } label: {
+                    Image(systemName: "plus")
+                        .font(.title2.weight(.semibold))
+                        .padding(18)
+                        .background(Color.accentColor)
+                        .foregroundStyle(.white)
+                        .clipShape(Circle())
+                        .shadow(color: .black.opacity(0.25), radius: 6, y: 3)
+                }
+                .padding(.trailing, 20)
+                .padding(.bottom, 8)
             }
             .navigationTitle("Categories")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button { showingAdd = true } label: { Image(systemName: "plus") }
-                }
-            }
             .sheet(isPresented: $showingAdd) {
                 AddCategorySheet(isPresented: $showingAdd)
             }

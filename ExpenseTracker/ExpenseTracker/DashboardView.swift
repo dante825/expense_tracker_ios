@@ -26,6 +26,14 @@ struct DashboardView: View {
 
     private var monthNet: Double { monthIncome - monthSpent }
 
+    private var taggedRecent: [Expense] {
+        Array(expenses.filter { !(((($0.tags as? Set<Tag>) ?? [])).isEmpty) }.prefix(10))
+    }
+
+    private var untaggedRecent: [Expense] {
+        Array(expenses.filter { ((($0.tags as? Set<Tag>) ?? [])).isEmpty }.prefix(10))
+    }
+
     private var categoryTotals: [(name: String, total: Double)] {
         var dict: [String: Double] = [:]
         for e in expenses where !e.isIncome {
@@ -59,14 +67,25 @@ struct DashboardView: View {
                     }
                 }
 
-                Section("Recent Entries") {
-                    let recent = Array(expenses.prefix(20))
-                    if recent.isEmpty {
-                        Text("No expenses yet. Tap Expenses to add one.")
+                Section("Tagged") {
+                    if taggedRecent.isEmpty {
+                        Text("No tagged expenses yet.")
                             .foregroundStyle(.secondary)
                             .font(.subheadline)
                     } else {
-                        ForEach(recent) { expense in
+                        ForEach(taggedRecent) { expense in
+                            ExpenseRow(expense: expense)
+                        }
+                    }
+                }
+
+                Section("Untagged") {
+                    if untaggedRecent.isEmpty {
+                        Text("All expenses are tagged.")
+                            .foregroundStyle(.secondary)
+                            .font(.subheadline)
+                    } else {
+                        ForEach(untaggedRecent) { expense in
                             ExpenseRow(expense: expense)
                         }
                     }
@@ -105,11 +124,28 @@ struct SummaryCard: View {
 struct ExpenseRow: View {
     @ObservedObject var expense: Expense
 
+    private var sortedTags: [Tag] {
+        ((expense.tags as? Set<Tag>) ?? []).sorted { ($0.name ?? "") < ($1.name ?? "") }
+    }
+
     var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 2) {
+        HStack(alignment: .top) {
+            VStack(alignment: .leading, spacing: 3) {
                 Text(expense.desc ?? "").font(.body)
                 Text(expense.category?.name ?? "").font(.caption).foregroundStyle(.secondary)
+                if !sortedTags.isEmpty {
+                    HStack(spacing: 4) {
+                        ForEach(sortedTags, id: \.self) { tag in
+                            Text(tag.name ?? "")
+                                .font(.caption2)
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 2)
+                                .background(Color.accentColor.opacity(0.12))
+                                .foregroundStyle(Color.accentColor)
+                                .clipShape(Capsule())
+                        }
+                    }
+                }
             }
             Spacer()
             VStack(alignment: .trailing, spacing: 2) {

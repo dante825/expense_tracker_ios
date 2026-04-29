@@ -11,23 +11,32 @@ struct RecurringView: View {
 
     var body: some View {
         NavigationStack {
-            List {
-                if recurrings.isEmpty {
-                    Text("No recurring expenses yet.")
-                        .foregroundStyle(.secondary)
-                        .font(.subheadline)
+            ZStack(alignment: .bottomTrailing) {
+                List {
+                    if recurrings.isEmpty {
+                        Text("No recurring expenses yet.")
+                            .foregroundStyle(.secondary)
+                            .font(.subheadline)
+                    }
+                    ForEach(recurrings) { r in
+                        RecurringRow(recurring: r)
+                    }
+                    .onDelete(perform: deleteRecurrings)
                 }
-                ForEach(recurrings) { r in
-                    RecurringRow(recurring: r)
+
+                Button { showingAdd = true } label: {
+                    Image(systemName: "plus")
+                        .font(.title2.weight(.semibold))
+                        .padding(18)
+                        .background(Color.accentColor)
+                        .foregroundStyle(.white)
+                        .clipShape(Circle())
+                        .shadow(color: .black.opacity(0.25), radius: 6, y: 3)
                 }
-                .onDelete(perform: deleteRecurrings)
+                .padding(.trailing, 20)
+                .padding(.bottom, 8)
             }
             .navigationTitle("Recurring")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button { showingAdd = true } label: { Image(systemName: "plus") }
-                }
-            }
             .sheet(isPresented: $showingAdd) {
                 AddRecurringView(isPresented: $showingAdd)
             }
