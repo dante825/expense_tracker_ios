@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <!-- Background gradient: deep teal to blue-green -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a7f5a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d4f7c;stop-opacity:1" />
+    </linearGradient>
+    <!-- Card shadow -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+    <!-- Glow for dollar sign -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Rounded square background (iOS icon shape handled by the OS, but fill the canvas) -->
+  <rect width="1024" height="1024" rx="0" ry="0" fill="url(#bg)"/>
+
+  <!-- Subtle top-right highlight circle -->
+  <circle cx="820" cy="200" r="300" fill="white" opacity="0.04"/>
+
+  <!-- Receipt / card shape -->
+  <rect x="212" y="240" width="600" height="480" rx="40" ry="40" fill="white" opacity="0.12" filter="url(#shadow)"/>
+  <rect x="232" y="260" width="560" height="440" rx="30" ry="30" fill="white" opacity="0.10"/>
+
+  <!-- Three horizontal "line item" bars on the receipt -->
+  <rect x="290" y="360" width="260" height="28" rx="14" fill="white" opacity="0.55"/>
+  <rect x="290" y="416" width="180" height="28" rx="14" fill="white" opacity="0.40"/>
+  <rect x="290" y="472" width="220" height="28" rx="14" fill="white" opacity="0.40"/>
+
+  <!-- Amount value bar (right side, highlighted) -->
+  <rect x="600" y="354" width="144" height="40" rx="20" fill="#4ecca3" opacity="0.90"/>
+  <rect x="600" y="410" width="144" height="40" rx="20" fill="white" opacity="0.30"/>
+  <rect x="600" y="466" width="144" height="40" rx="20" fill="white" opacity="0.30"/>
+
+  <!-- Divider line -->
+  <rect x="264" y="540" width="496" height="3" rx="2" fill="white" opacity="0.20"/>
+
+  <!-- Total row -->
+  <rect x="290" y="568" width="140" height="28" rx="14" fill="white" opacity="0.65"/>
+  <rect x="580" y="558" width="168" height="48" rx="24" fill="#4ecca3" opacity="1"/>
+
+  <!-- Dollar sign on the green total pill -->
+  <text x="664" y="594" font-family="SF Pro Display, Helvetica Neue, Arial, sans-serif" font-size="30" font-weight="700" fill="#0d4f7c" text-anchor="middle" dominant-baseline="middle">$24.50</text>
+
+  <!-- Large $ symbol centered above the card -->
+  <text x="512" y="228" font-family="SF Pro Display, Helvetica Neue, Arial, sans-serif" font-size="100" font-weight="800" fill="white" text-anchor="middle" dominant-baseline="middle" opacity="0.18">$</text>
+
+  <!-- Upward trending mini bar chart at bottom-left of card -->
+  <rect x="290" y="636" width="32" height="56" rx="6" fill="#4ecca3" opacity="0.70"/>
+  <rect x="336" y="612" width="32" height="80" rx="6" fill="#4ecca3" opacity="0.85"/>
+  <rect x="382" y="592" width="32" height="100" rx="6" fill="#4ecca3" opacity="1"/>
+</svg>
