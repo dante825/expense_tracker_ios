@@ -27,12 +27,12 @@
 
 ## Quality (ship without, but recommended)
 
-- [ ] **Unit tests for `DataSeeder`** — Add tests in `ExpenseTrackerTests/ExpenseTrackerTests.swift` covering:
+- [x] **Unit tests for `DataSeeder`** — Add tests in `ExpenseTrackerTests/ExpenseTrackerTests.swift` covering:
   - `seedDefaultCategories` idempotency: calling twice must not create duplicate categories.
   - `generateRecurring`: overdue recurring expenses must materialise as `Expense` objects and `nextDate` must advance correctly.
   - Use `PersistenceController(inMemory: true)` for an isolated store per test.
 
-- [ ] **Unit tests for `AddEditExpenseView` logic** — Cover the `isEditing` computed property and verify that saving persists the correct fields to CoreData. Use `PersistenceController.preview` for the in-memory store.
+- [x] **Unit tests for `AddEditExpenseView` logic** — Cover the `isEditing` computed property and verify that saving persists the correct fields to CoreData. Use `PersistenceController.preview` for the in-memory store.
 
 ## App Store metadata (required for review)
 
