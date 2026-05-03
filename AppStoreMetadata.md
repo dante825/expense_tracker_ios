@@ -34,7 +34,7 @@ expense,budget,finance,tracker,spending,income,receipt,recurring,categories,pers
 https://github.com/dante825/expense_tracker_ios
 
 ## Privacy Policy URL
-(see PrivacyPolicy.md — host this on GitHub Pages or similar)
+https://github.com/dante825/expense_tracker_ios/blob/main/PrivacyPolicy.md
 
 ---
 
