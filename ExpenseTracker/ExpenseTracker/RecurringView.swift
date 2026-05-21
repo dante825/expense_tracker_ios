@@ -144,7 +144,7 @@ struct AddRecurringView: View {
         r.amount = amountValue
         r.desc = desc
         r.frequency = frequency
-        r.nextDate = startDate
+        r.nextDate = Calendar.current.startOfDay(for: startDate)
         r.endDate = hasEndDate ? endDate : nil
         r.isActive = true
         r.category = category

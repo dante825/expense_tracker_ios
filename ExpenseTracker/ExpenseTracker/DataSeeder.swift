@@ -25,7 +25,7 @@ struct DataSeeder {
         let recurrings = (try? context.fetch(request)) ?? []
         var didChange = false
         for r in recurrings {
-            guard var next = r.nextDate else { continue }
+            guard var next = r.nextDate.map({ Calendar.current.startOfDay(for: $0) }) else { continue }
             while next <= today {
                 if let end = r.endDate, next > end {
                     r.isActive = false
@@ -39,13 +39,14 @@ struct DataSeeder {
                 expense.isIncome = false
                 expense.category = r.category
                 didChange = true
+                let cal = Calendar.current
                 switch r.frequency {
                 case "daily":
-                    next = Calendar.current.date(byAdding: .day, value: 1, to: next) ?? next
+                    next = cal.startOfDay(for: cal.date(byAdding: .day, value: 1, to: next) ?? next)
                 case "weekly":
-                    next = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: next) ?? next
+                    next = cal.startOfDay(for: cal.date(byAdding: .weekOfYear, value: 1, to: next) ?? next)
                 default:
-                    next = Calendar.current.date(byAdding: .month, value: 1, to: next) ?? next
+                    next = cal.startOfDay(for: cal.date(byAdding: .month, value: 1, to: next) ?? next)
                 }
                 r.nextDate = next
             }
